@@ -13,23 +13,28 @@ import {BrowserRouter as Router ,Switch,Route} from 'react-router-dom'
 import Test from './components/test'
 import BannerAdd from './components/bannerAdd'
 import Description from './components/description'
+import Query from './components/query'
 
 ReactDOM.render(
   <Router>
     <Switch>
     
-  <Route path='/' exact render ={()=>
+  <Route exact path='/' exact render ={()=>
       <React.Fragment>
          <NavBar/>
          <Carousel/>
-         <VideoHelper genre ={"Most Liked"}/>
+         <h4 className='VPN container'>Use VPN to load the website</h4>
+        
+         <VideoHelper genre ={"Most Liked"} />
          <VideoHelper genre ={"Mystery"}/>
          
          <VideoHelper genre ={"Animation"}/>
-      </React.Fragment>
+      
+         </React.Fragment>
+       
   }/>
 
-  <Route path='/info' render={()=>
+  <Route  path='/info' render={()=>
   <React.Fragment>
     <NavBar/>
   </React.Fragment>
@@ -40,15 +45,13 @@ ReactDOM.render(
     <Test/>
   }/>
 
-  <Route path = '/banner' render={()=>
+  <Route  path = '/banner' render={()=>
   <BannerAdd/>
   }/>
 
-   {/* <Route path = '/search/:query' render={()=>
- 
-  }/> */}
+   <Route path = '/search/:query' component = {Query}/>
 
-  <Route path ='/:id' component = {Description}/>
+  <Route  path ='/:id' component = {Description}/>
 
  
    

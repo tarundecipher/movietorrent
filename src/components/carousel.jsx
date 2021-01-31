@@ -4,7 +4,7 @@ import axios from "axios";
 class Carousel extends Component {
   state = {
     imgurls: [
-      "https://m.media-amazon.com/images/G/01/digital/video/sonata/PV_IN_SOTY2v3/538f6dab-db1f-41c1-8962-cf91f49b830f._UR3000,600_SX3000_FMwebp_.jpg",
+      "https://www.mediamonks.com/img/Project/172_header_928c7be98f1dd1173ac27f4a1f4c9623_1920x480.jpg",
     ],
   };
 

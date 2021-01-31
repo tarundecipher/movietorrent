@@ -7,21 +7,20 @@ class Videos extends Component {
       <React.Fragment>
         <div className="allslider">
           <div
-            className="arrows"
+            className="arrows "
             style={{ marginTop: "100px", marginBottom: "-120px" }}
           >
-            <a
+            <img
               onClick={this.props.slideright}
-              className="previous round arrow_element"
-            >
-              &#8249;
-            </a>
-            <a
+              className="arrow_element "
+              src="https://i.ibb.co/6nfQQH7/arrowleft.jpg"
+            />
+
+            <img
               onClick={this.props.slideleft}
-              className="next round arrow_element"
-            >
-              &#8250;
-            </a>
+              className="arrow_element"
+              src="https://i.ibb.co/m0Jm3VC/arrowright.jpg"
+            />
           </div>
           <div
             className="body_videos_all"
@@ -32,7 +31,7 @@ class Videos extends Component {
                 <Link to={`/${url.id}`}>
                   <img
                     className="body_videos"
-                    src={url.large_cover_image}
+                    src={url.medium_cover_image}
                   ></img>
                 </Link>
               </div>
