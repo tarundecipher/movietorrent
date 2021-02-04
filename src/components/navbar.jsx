@@ -21,7 +21,7 @@ class NavBar extends Component {
             <img
               id="logo"
               className="header_elements"
-              src="https://i.ibb.co/JtvsWhn/tarunlogo.png"
+              src="https://i.ibb.co/M2HKZTn/movieflix.jpg"
             ></img>
             <div className="header_elements">
               <a className="navhome" href="/">
