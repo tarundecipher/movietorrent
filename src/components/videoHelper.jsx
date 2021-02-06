@@ -11,7 +11,7 @@ class VideoHelper extends Component {
     super(props);
     this.getinfo();
   }
-
+  kljsrf;
   getinfo = () => {
     var genre = this.props.genre;
     // console.log(genre);
