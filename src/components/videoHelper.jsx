@@ -25,7 +25,7 @@ class VideoHelper extends Component {
           "https://yts.mx/api/v2/list_movies.json?limit=50&sort_by=like_count"
         )
         .then((res) => {
-          // console.log(res.data.data.movies);
+          console.log(res.data.data.movies);
           this.setState({
             imgurls: res.data.data.movies.map((movies) => movies),
           });
