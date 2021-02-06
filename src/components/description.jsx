@@ -75,7 +75,7 @@ class Description extends Component {
 
           <a
             style={{ color: "white", marginLeft: "10px" }}
-            href="http://movieflix.buzz"
+            href="https://movietorrent-b8018.web.app/"
           >
             DOWNLOAD
           </a>
