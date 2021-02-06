@@ -23,7 +23,7 @@ ReactDOM.render(
       <React.Fragment>
          <NavBar/>
          <Carousel/>
-         <h4 className='VPN container'>Use VPN to load the website</h4>
+         
         
          <VideoHelper genre ={"upcoming"} />
          <VideoHelper genre ={"top_rated"}/>
