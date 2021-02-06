@@ -31,7 +31,7 @@ class Videos extends Component {
                 <Link to={`/${url.id}`}>
                   <img
                     className="body_videos"
-                    src={url.medium_cover_image}
+                    src={"https://image.tmdb.org/t/p/w500" + url.poster_path}
                   ></img>
                 </Link>
               </div>

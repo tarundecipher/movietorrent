@@ -25,10 +25,10 @@ ReactDOM.render(
          <Carousel/>
          <h4 className='VPN container'>Use VPN to load the website</h4>
         
-         <VideoHelper genre ={"Most Liked"} />
-         <VideoHelper genre ={"Mystery"}/>
+         <VideoHelper genre ={"upcoming"} />
+         <VideoHelper genre ={"top_rated"}/>
          
-         <VideoHelper genre ={"Animation"}/>
+         <VideoHelper genre ={"popular"}/>
       
          </React.Fragment>
        

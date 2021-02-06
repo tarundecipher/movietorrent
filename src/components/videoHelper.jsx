@@ -5,44 +5,74 @@ import axios from "axios";
 class VideoHelper extends Component {
   state = {
     imgurls: [],
+    genre: "",
     leftMargin: 20,
   };
   constructor(props) {
     super(props);
     this.getinfo();
   }
-  kljsrf;
-  getinfo = () => {
-    var genre = this.props.genre;
-    // console.log(genre);
-    var search =
-      "https://yts.mx/api/v2/list_movies.json?limit=50&sort_by=like_count&" +
-      "genre=" +
-      genre;
-    if (genre === "Most Liked") {
-      axios
-        .get(
-          "https://yts.mx/api/v2/list_movies.json?limit=50&sort_by=like_count"
-        )
-        .then((res) => {
-          console.log(res.data.data.movies);
-          this.setState({
-            imgurls: res.data.data.movies.map((movies) => movies),
-          });
-        });
-    } else {
-      axios
-        .get(
-          search
-          // { genre }
-        )
-        .then((res) => {
-          // console.log(res.data.data.movies);
-          this.setState({
-            imgurls: res.data.data.movies.map((movies) => movies),
-          });
-        });
+  componentDidMount() {
+    this.getgenre = this.getgenre.bind(this);
+    this.getgenre();
+  }
+
+  getgenre = () => {
+    var temp = this.props.genre;
+    var temp2 = "";
+
+    for (var i = 0; i < temp.length; i++) {
+      if (temp[i] != "_") {
+        temp2 = temp2 + temp[i];
+      } else {
+        temp2 = temp2 + " ";
+      }
     }
+    temp2 = temp2.toUpperCase();
+
+    this.setState({ genre: temp2 });
+  };
+  getinfo = () => {
+    var genr = this.props.genre;
+
+    var search =
+      "https://api.themoviedb.org/3/movie/" +
+      genr +
+      "?api_key=35361fe30128f961c910034da9008f70&&page=2";
+
+    axios.get(search).then((res) => {
+      // console.log(res.data.results);
+      this.setState({
+        imgurls: res.data.results.map((movies) => movies),
+      });
+    });
+
+    var search =
+      "https://api.themoviedb.org/3/movie/" +
+      genr +
+      "?api_key=35361fe30128f961c910034da9008f70&&page=1";
+
+    axios.get(search).then((res) => {
+      // console.log(res.data.results);
+      this.setState({
+        imgurls: this.state.imgurls.concat(
+          res.data.results.map((movies) => movies)
+        ),
+      });
+    });
+    var search =
+      "https://api.themoviedb.org/3/movie/" +
+      genr +
+      "?api_key=35361fe30128f961c910034da9008f70&&page=3";
+
+    axios.get(search).then((res) => {
+      // console.log(res.data.results);
+      this.setState({
+        imgurls: this.state.imgurls.concat(
+          res.data.results.map((movies) => movies)
+        ),
+      });
+    });
   };
 
   handleLeft = () => {
@@ -71,7 +101,7 @@ class VideoHelper extends Component {
             marginTop: "20px",
           }}
         >
-          {this.props.genre}
+          {this.state.genre}
         </h1>
         <Videos
           imgurls={this.state.imgurls}
