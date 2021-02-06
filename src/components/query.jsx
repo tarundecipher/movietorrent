@@ -15,15 +15,15 @@ class Query extends Component {
 
   getinfo = () => {
     var query = String(this.props.match.params.query);
-    // console.log(this);
-    // console.log(query);
+    query = '"' + query + '"';
+
     var search =
-      "https://yts.mx/api/v2/list_movies.json?limit=50&query_term=" + query;
+      "https://api.themoviedb.org/3/search/movie?api_key=35361fe30128f961c910034da9008f70&query=" +
+      query;
 
     axios.get(search).then((res) => {
-      // console.log(res.data.data.movies);
       this.setState({
-        movies: res.data.data.movies.map((movies) => movies),
+        movies: res.data.results.map((movies) => movies),
       });
     });
   };
@@ -36,7 +36,7 @@ class Query extends Component {
             <Link to={`/${url.id}`}>
               <img
                 className="query img-thumbnail "
-                src={url.medium_cover_image}
+                src={"https://image.tmdb.org/t/p/w500" + url.poster_path}
               ></img>
             </Link>
           ))}
