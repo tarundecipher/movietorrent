@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "tmdb-7d19a"
+    "default": "tmdb-7d19a",
+    "staging": "tmdb-7d19a"
   }
 }
