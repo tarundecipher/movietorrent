@@ -14,6 +14,7 @@ import {BrowserRouter as Router ,Switch,Route} from 'react-router-dom'
 
 import Description from './components/description'
 import Query from './components/query'
+import signUp from './components/signUp'
 
 ReactDOM.render(
   <Router>
@@ -46,6 +47,8 @@ ReactDOM.render(
   
 
    <Route path = '/search/:query' component = {Query}/>
+
+   <Route path='/register' component = {signUp}/>
 
   <Route  path ='/:id' component = {Description}/>
 
