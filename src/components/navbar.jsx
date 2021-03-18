@@ -1,16 +1,35 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import axios from "axios";
 
 class NavBar extends Component {
   state = {
     search: "",
+    loggedin: false,
   };
+
+  componentDidMount() {
+    this.auth();
+  }
 
   updateSearch = (e) => {
     var s = e.target.value;
 
     this.setState({ search: s });
     // console.log(this.state.search);
+  };
+
+  auth = async () => {
+    await axios
+      .get("http://localhost:5000/auth", { withCredentials: true })
+      .then((res) => {
+        if (res.data.condition === true) {
+          this.setState({ loggedin: true });
+        } else {
+          this.setState({ loggedin: false });
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   render() {
@@ -40,6 +59,21 @@ class NavBar extends Component {
                 aria-label="Search"
               />
             </form>
+            {this.state.loggedin == true ? (
+              <a href="/logout" className="authentication">
+                Log out
+              </a>
+            ) : (
+              <React.Fragment>
+                <a href="/login" className="authentication">
+                  Sign In
+                </a>
+
+                <a href="/register" className="authentication">
+                  Sign Up
+                </a>
+              </React.Fragment>
+            )}
           </div>
         </nav>
       </React.Fragment>

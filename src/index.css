@@ -45,14 +45,12 @@ code {
   margin-bottom: 10px;
 }
 
-#signin {
-  margin-left: 800px;
-  padding-top: 50px;
-
+.authentication {
   color: rgb(173, 168, 168);
+  margin-left: 5px;
 }
 
-#signin:hover {
+.authentication:hover {
   color: white;
 
   text-decoration: none;
@@ -169,4 +167,9 @@ body {
   color: white;
   display: flex;
   justify-content: space-around;
+}
+
+#comment {
+  background-color: #18222b;
+  color: white;
 }

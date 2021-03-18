@@ -15,6 +15,8 @@ import {BrowserRouter as Router ,Switch,Route} from 'react-router-dom'
 import Description from './components/description'
 import Query from './components/query'
 import signUp from './components/signUp'
+import login from './components/Login'
+import logout from './components/logout'
 
 ReactDOM.render(
   <Router>
@@ -48,7 +50,9 @@ ReactDOM.render(
 
    <Route path = '/search/:query' component = {Query}/>
 
-   <Route path='/register' component = {signUp}/>
+   <Route path='/register' exact component = {signUp}/>
+   <Route path='/login' exact component = {login}/>
+   <Route path='/logout' exact component = {logout}/>
 
   <Route  path ='/:id' component = {Description}/>
 
@@ -61,7 +65,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-// reportWebVitals();
+

@@ -13,6 +13,23 @@ class Query extends Component {
     this.getinfo();
   }
 
+  auth = async () => {
+    let bool = false;
+    await axios
+      .get(
+        "http://localhost:4000/auth",
+
+        { withCredentials: true }
+      )
+      .then((res) => {
+        bool = true;
+      })
+      .catch(() => {
+        bool = false;
+      });
+    return bool;
+  };
+
   getinfo = () => {
     var query = String(this.props.match.params.query);
     query = '"' + query + '"';

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 class signUp extends Component {
   state = {
     Username: "",
@@ -6,7 +7,17 @@ class signUp extends Component {
   };
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event);
+
+    axios
+      .post("http://localhost:5000/signUp", {
+        UserName: this.state.Username,
+        Password: this.state.Password,
+      })
+      .then((res) => {
+        if (res.status == 400) {
+          console.log("err2");
+        }
+      });
   };
   handleUsername = (event) => {
     let Username = event.target.value;
