@@ -11,28 +11,60 @@ class Description extends Component {
     imdb: "",
     video: "",
     loggedin: false,
+    movie_id: "12",
+    comment: "",
+    payload: "",
+    comments: [],
   };
 
   constructor(props) {
     super(props);
     this.getinfo();
     this.auth();
+    this.getcomments();
   }
 
-  getinfo = () => {
-    var temp = String(this.props.match.params.id);
-    var search =
+  handleComment = (event) => {
+    const comment = event.target.value;
+    this.setState({ comment: comment });
+  };
+
+  handleSubmit = async (event) => {
+    event.preventDefault();
+    await axios
+      .post("http://localhost:5000/comments", {
+        payload: this.state.payload,
+        movie_id: this.state.movie_id,
+        comment: this.state.comment,
+      })
+      .then(window.location.reload());
+  };
+
+  getcomments = () => {
+    let temp = String(this.props.match.params.id);
+    let search = "http://localhost:5000/comments/" + temp;
+    axios.get(search).then((res) => {
+      this.setState({ comments: res.data.comments });
+      console.log(this.state.comments);
+    });
+  };
+
+  getinfo = async () => {
+    let temp = String(this.props.match.params.id);
+
+    let search =
       "https://api.themoviedb.org/3/movie/" +
       temp +
       "?api_key=35361fe30128f961c910034da9008f70";
 
-    axios.get(search).then((res) => {
+    await axios.get(search).then((res) => {
       this.setState({
         project_info: res.data.overview,
         project_title: res.data.original_title,
         coverimg: "https://image.tmdb.org/t/p/w500" + res.data.backdrop_path,
 
         imdb: res.data.vote_average,
+        movie_id: temp,
       });
     });
     search =
@@ -52,6 +84,7 @@ class Description extends Component {
       .then((res) => {
         if (res.data.condition === true) {
           this.setState({ loggedin: true });
+          this.setState({ payload: res.data.payload });
         } else {
           this.setState({ loggedin: false });
         }
@@ -87,23 +120,44 @@ class Description extends Component {
             ></iframe>
           </div>
           <div className="container-fluid links">
-            <p style={{ color: "white" }}>Download From: </p>
-
-            <a
-              style={{ color: "white", marginLeft: "10px" }}
-              href={
+            {/* <p style={{ color: "white" }}>Download From: </p> */}
+            <form
+              action={
                 "https://movietorrent-b8018.web.app/search/" +
                 this.state.project_title
               }
+              style={{ marginBottom: "10px" }}
             >
-              DOWNLOAD
-            </a>
+              <button className="btn btn-info">DOWNLOAD</button>
+            </form>
           </div>
+          {/* need to add comments here---------------------*/}
+          {this.state.comments.map((comment) => (
+            <div className="container-fluid comments">
+              <p style={{ color: "white" }}>
+                <strong>{comment.UserName}</strong>
+                <br></br>
+                {comment.comment}
+              </p>
+            </div>
+          ))}
           <div class="form-group container-fluid">
-            <label for="comment" style={{ color: "white" }}>
-              Comment:
-            </label>
-            <textarea class="form-control" rows="5" id="comment"></textarea>
+            <form onSubmit={this.handleSubmit}>
+              <label for="comment" style={{ color: "white" }}>
+                Comment:
+              </label>
+              <textarea
+                onChange={this.handleComment}
+                class="form-control"
+                rows="5"
+                id="comment"
+              ></textarea>
+              <div style={{ marginTop: "5px" }}>
+                <button type="submit" class="btn btn-primary">
+                  Submit
+                </button>
+              </div>
+            </form>
           </div>
         </React.Fragment>
       );
@@ -134,18 +188,26 @@ class Description extends Component {
             ></iframe>
           </div>
           <div className="container-fluid links">
-            <p style={{ color: "white" }}>Download From: </p>
-
-            <a
-              style={{ color: "white", marginLeft: "10px" }}
-              href={
+            <form
+              action={
                 "https://movietorrent-b8018.web.app/search/" +
                 this.state.project_title
               }
+              style={{ marginBottom: "10px" }}
             >
-              DOWNLOAD
-            </a>
+              <button className="btn btn-info">DOWNLOAD</button>
+            </form>
           </div>
+
+          {this.state.comments.map((comment) => (
+            <div className="container-fluid comments">
+              <p style={{ color: "white" }}>
+                <strong>{comment.UserName}</strong>
+                <br></br>
+                {comment.comment}
+              </p>
+            </div>
+          ))}
           <div className="container-fluid">
             <a href="/login" style={{ textDecoration: "none" }}>
               <h3 style={{ color: "white" }}>Login to Post Comments</h3>

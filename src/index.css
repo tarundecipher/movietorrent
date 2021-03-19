@@ -47,7 +47,7 @@ code {
 
 .authentication {
   color: rgb(173, 168, 168);
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
 .authentication:hover {
@@ -172,4 +172,8 @@ body {
 #comment {
   background-color: #18222b;
   color: white;
+}
+
+.comments {
+  border-bottom: solid white 1px;
 }
